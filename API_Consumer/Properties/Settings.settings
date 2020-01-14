@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="API_Consumer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="API_EndPoint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.chess.com/pub/</Value>
+    </Setting>
+    <Setting Name="MyClubs" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Excel_location" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\bojan.milovanovic\Documents\</Value>
+    </Setting>
+    <Setting Name="Cron_Location" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\bojan.milovanovic\Documents\</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

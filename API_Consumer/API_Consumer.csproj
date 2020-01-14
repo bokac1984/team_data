@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A4F6CDD8-51D8-45D1-A788-0D866ECC2C86}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>API_Consumer</RootNamespace>
+    <AssemblyName>API_Consumer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SepaAdapter\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About\Help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About\Help.Designer.cs">
+      <DependentUpon>Help.cs</DependentUpon>
+    </Compile>
+    <Compile Include="API\APIEndpoints.cs" />
+    <Compile Include="API\GetData.cs" />
+    <Compile Include="ClubMatch\ClubMatch.cs" />
+    <Compile Include="ClubMatch\ClubMatchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClubMatch\ClubMatchForm.Designer.cs">
+      <DependentUpon>ClubMatchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClubMatch\ClubMatchView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClubMatch\ClubMatchView.Designer.cs">
+      <DependentUpon>ClubMatchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClubMatch\GameInProgress.cs" />
+    <Compile Include="ClubMatch\RegistrationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClubMatch\RegistrationForm.Designer.cs">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClubMatch\Registrations\HeaderData.cs" />
+    <Compile Include="ClubMatch\Registrations\RegistrationManager.cs" />
+    <Compile Include="ClubMatch\Registrations\Registrations.cs" />
+    <Compile Include="ClubMatch\TimerDownlaod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClubMatch\TimerDownlaod.Designer.cs">
+      <DependentUpon>TimerDownlaod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClubMatch\TimerOverview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClubMatch\TimerOverview.Designer.cs">
+      <DependentUpon>TimerOverview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clubs\Activity.cs" />
+    <Compile Include="Clubs\ClubManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clubs\ClubManagement.Designer.cs">
+      <DependentUpon>ClubManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clubs\ClubObjekt.cs" />
+    <Compile Include="Clubs\Clubs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clubs\Clubs.Designer.cs">
+      <DependentUpon>Clubs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clubs\ClubView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clubs\ClubView.Designer.cs">
+      <DependentUpon>ClubView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clubs\IMatchType.cs" />
+    <Compile Include="Clubs\Matches.cs" />
+    <Compile Include="Clubs\MemberActivity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clubs\MemberActivity.Designer.cs">
+      <DependentUpon>MemberActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clubs\MyClubs.cs" />
+    <Compile Include="Clubs\NoClubFoundException.cs" />
+    <Compile Include="Common\Commons.cs" />
+    <Compile Include="Common\ICommons.cs" />
+    <Compile Include="Common\InitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\InitForm.Designer.cs">
+      <DependentUpon>InitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\Logger.cs" />
+    <Compile Include="Common\Waiting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\Waiting.Designer.cs">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cron\CronData.cs" />
+    <Compile Include="Cron\CronFileLocations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cron\CronFileLocations.Designer.cs">
+      <DependentUpon>CronFileLocations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cron\CSVManager.cs" />
+    <Compile Include="Cron\DoJob.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Players\PlayerInfo.cs" />
+    <Compile Include="Players\PlayerStats.cs" />
+    <Compile Include="Players\PlayerViewById.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Players\PlayerViewById.Designer.cs">
+      <DependentUpon>PlayerViewById.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="API\WS.cs" />
+    <EmbeddedResource Include="About\Help.resx">
+      <DependentUpon>Help.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClubMatch\ClubMatchForm.resx">
+      <DependentUpon>ClubMatchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClubMatch\ClubMatchView.resx">
+      <DependentUpon>ClubMatchView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClubMatch\RegistrationForm.resx">
+      <DependentUpon>RegistrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClubMatch\TimerDownlaod.resx">
+      <DependentUpon>TimerDownlaod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClubMatch\TimerOverview.resx">
+      <DependentUpon>TimerOverview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Clubs\ClubManagement.resx">
+      <DependentUpon>ClubManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Clubs\Clubs.resx">
+      <DependentUpon>Clubs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Clubs\ClubView.resx">
+      <DependentUpon>ClubView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Clubs\MemberActivity.resx">
+      <DependentUpon>MemberActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\Waiting.resx">
+      <DependentUpon>Waiting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cron\CronFileLocations.resx">
+      <DependentUpon>CronFileLocations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Players\PlayerViewById.resx">
+      <DependentUpon>PlayerViewById.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
