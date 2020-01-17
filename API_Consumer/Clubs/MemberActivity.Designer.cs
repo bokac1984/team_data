@@ -39,6 +39,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.pg_APIFetch = new System.Windows.Forms.ToolStripProgressBar();
             this.progress_Label = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusna_labela = new System.Windows.Forms.ToolStripStatusLabel();
+            this.btn_ExcelExport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Info)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -127,7 +129,8 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pg_APIFetch,
-            this.progress_Label});
+            this.progress_Label,
+            this.statusna_labela});
             this.statusStrip1.Location = new System.Drawing.Point(0, 687);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(868, 22);
@@ -146,11 +149,28 @@
             this.progress_Label.Size = new System.Drawing.Size(0, 17);
             this.progress_Label.Visible = false;
             // 
+            // statusna_labela
+            // 
+            this.statusna_labela.Name = "statusna_labela";
+            this.statusna_labela.Size = new System.Drawing.Size(0, 17);
+            // 
+            // btn_ExcelExport
+            // 
+            this.btn_ExcelExport.Enabled = false;
+            this.btn_ExcelExport.Location = new System.Drawing.Point(710, 92);
+            this.btn_ExcelExport.Name = "btn_ExcelExport";
+            this.btn_ExcelExport.Size = new System.Drawing.Size(146, 27);
+            this.btn_ExcelExport.TabIndex = 10;
+            this.btn_ExcelExport.Text = "Export u Excel";
+            this.btn_ExcelExport.UseVisualStyleBackColor = true;
+            this.btn_ExcelExport.Click += new System.EventHandler(this.btn_ExcelExport_Click);
+            // 
             // MemberActivity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 709);
+            this.Controls.Add(this.btn_ExcelExport);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btn_ShowInfo);
             this.Controls.Add(this.dgv_Info);
@@ -184,5 +204,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar pg_APIFetch;
         private System.Windows.Forms.ToolStripStatusLabel progress_Label;
+        private System.Windows.Forms.Button btn_ExcelExport;
+        private System.Windows.Forms.ToolStripStatusLabel statusna_labela;
     }
 }

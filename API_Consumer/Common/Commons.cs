@@ -45,11 +45,14 @@ namespace API_Consumer.Common
                 saveToExcel(grid);
             }
         }
-
+        /// <summary>
+        /// Get string date time
+        /// </summary>
+        /// <param name="unixTime"></param>
+        /// <returns>string representation of date time</returns>
         public string FromUnixTime(long unixTime)
         {
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            return epoch.AddSeconds(unixTime).ToString("yyyy.MM.dd HH:mm:ss");
+            return FromUnixTimeDateTime(unixTime).ToString("yyyy.MM.dd HH:mm:ss");
         }
 
         public DateTime FromUnixTimeDateTime(long unixTime)

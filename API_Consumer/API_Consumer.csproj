@@ -158,6 +158,7 @@
     <Compile Include="Clubs\MyClubs.cs" />
     <Compile Include="Clubs\NoClubFoundException.cs" />
     <Compile Include="Common\Commons.cs" />
+    <Compile Include="Common\ExcelExporter.cs" />
     <Compile Include="Common\ICommons.cs" />
     <Compile Include="Common\InitForm.cs">
       <SubType>Form</SubType>

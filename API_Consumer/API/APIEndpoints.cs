@@ -44,7 +44,7 @@ namespace API_Consumer.API
             return GetData.getApiData<Matches>(MatchUrl);
         }
 
-        public ClubMatch.ClubMatch GetClubMatch(string matchId)
+        public ClubMatch.ClubMatch GetClubMatch(string matchId, bool isLive)
         {
             string url = _ApiEndPoint + "match/" + matchId;
             return GetData.getApiData<ClubMatch.ClubMatch>(url);

@@ -1,10 +1,12 @@
 ﻿using API_Consumer.Common;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace API_Consumer.Clubs
     {
         private Activity _memberActivity;
 
-        private HashSet<Member> _hs_members;
+        private HashSet<MemberDataForGrid> _hs_members;
 
         private int membersCount;
 
@@ -68,6 +70,8 @@ namespace API_Consumer.Clubs
             dgv_Info.DataSource = source;
 
             CommonFunctions.ResizeColumns(dgv_Info);
+
+            btn_ExcelExport.Enabled = true;
         }
 
         private void dgv_Info_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -77,7 +81,7 @@ namespace API_Consumer.Clubs
 
         private void DoWork(IProgress<int> progress)
         {
-            _hs_members = new HashSet<Member>();
+            _hs_members = new HashSet<MemberDataForGrid>();
             List<Member> allMembers = new List<Member>();
             var a = from aa in _memberActivity.AllTime
                     select new Member()
@@ -106,7 +110,16 @@ namespace API_Consumer.Clubs
 
             foreach (var item in allMembers)
             {
-                _hs_members.Add(item);
+                MemberDataForGrid memberDataItem = new MemberDataForGrid();
+                memberDataItem.Username = item.Username;
+                memberDataItem.LastOnline = CommonFunctions.FromUnixTime(item.LastOnline);
+                memberDataItem.Joined = CommonFunctions.FromUnixTime(item.Joined);
+                memberDataItem.ChallengeWaiting = item.ChallengeWaiting;
+                memberDataItem.GamesToMove = item.GamesToMove;
+                memberDataItem.NewMessages = item.NewMessages;
+                memberDataItem.Notifications = item.Notifications;
+                memberDataItem.JoinedSite = "";
+                _hs_members.Add(memberDataItem);
             }
 
             int countMembers = _hs_members.Count;
@@ -115,11 +128,14 @@ namespace API_Consumer.Clubs
             foreach (var m in _hs_members)
             {
                 Notices n = api.GetNoticesForPlayer(m.Username);
+                Player.PlayerInfo playerInfo = api.GetPlayerInfo(m.Username);
 
                 m.GamesToMove = n.GamesToMove;
                 m.ChallengeWaiting = n.ChallengeWaiting;
                 m.NewMessages = n.NewMessages;
                 m.Notifications = n.Notifications;
+                m.LastOnline = CommonFunctions.FromUnixTime(playerInfo.LastOnline);
+                m.JoinedSite = CommonFunctions.FromUnixTime(playerInfo.Joined);
 
                 progress.Report(i++);
 
@@ -130,6 +146,67 @@ namespace API_Consumer.Clubs
         private void dgv_Info_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             CommonFunctions.viewPlayer(sender, 0, 0);
+        }
+
+        private void btn_ExcelExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (ExcelPackage excelPackage = new ExcelPackage())
+                {
+                    //create a new Worksheet
+                    ExcelWorksheet ws = excelPackage.Workbook.Worksheets.Add("Sheet 1");
+
+                    string nazivFajla = "aktivnost_new.xlsx";
+                    string filePath = Properties.Settings.Default.Excel_location + nazivFajla;
+
+                    if (File.Exists(filePath))
+                    {
+                        throw new Exception("već postoji fajl");
+                    }
+
+                    ws.Cells["A1"].Value = "Username";
+                    ws.Cells["B1"].Value = "PristupioSajtu";
+                    ws.Cells["C1"].Value = "PristupioKlubu";
+                    ws.Cells["D1"].Value = "LastOnline";
+                    ws.Cells["E1"].Value = "ChallengeWaiting";
+                    ws.Cells["F1"].Value = "GamesToMove";
+                    ws.Cells["G1"].Value = "NewMessages";
+                    ws.Cells["H1"].Value = "Notifications";
+                    
+
+                    int i = 2;
+
+                    foreach (var item in _hs_members)
+                    {
+                        ws.Cells["A" + i.ToString()].Value = item.Username;
+                        ws.Cells["B" + i.ToString()].Value = item.JoinedSite;
+                        ws.Cells["B" + i.ToString()].Style.Numberformat.Format = "yyyy-mm-dd hh:mm:ss";
+                        ws.Cells["C" + i.ToString()].Value = item.Joined;
+                        ws.Cells["C" + i.ToString()].Style.Numberformat.Format = "yyyy-mm-dd hh:mm:ss";
+                        ws.Cells["D" + i.ToString()].Value = item.LastOnline;
+                        ws.Cells["D" + i.ToString()].Style.Numberformat.Format = "yyyy-mm-dd hh:mm:ss";
+                        ws.Cells["E" + i.ToString()].Value = item.ChallengeWaiting;
+                        ws.Cells["F" + i.ToString()].Value = item.GamesToMove;
+                        ws.Cells["G" + i.ToString()].Value = item.NewMessages;
+                        ws.Cells["H" + i.ToString()].Value = item.Notifications;
+                        i++;
+                    }
+
+                    ws.Cells.AutoFitColumns();
+
+                    //convert the excel package to a byte array
+                    byte[] bin = excelPackage.GetAsByteArray();
+
+                    //write the file to the disk
+                    File.WriteAllBytes(filePath, bin);
+                    statusna_labela.Text = "Excel saved!";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška: " + ex.Message);
+            }
         }
     }
 }

@@ -59,7 +59,13 @@
             this.btn_GamePreview = new System.Windows.Forms.Button();
             this.p_NotRegisteredMatches = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.pg_APIFetch = new System.Windows.Forms.ToolStripProgressBar();
             this.tsl_Time = new System.Windows.Forms.ToolStripStatusLabel();
+            this.l_DisplayCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.l_Closed2 = new System.Windows.Forms.Label();
+            this.l_Closed1 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatch)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.p_NotRegisteredMatches.SuspendLayout();
@@ -80,7 +86,7 @@
             this.dgvMatch.Name = "dgvMatch";
             this.dgvMatch.ReadOnly = true;
             this.dgvMatch.RowTemplate.Height = 24;
-            this.dgvMatch.Size = new System.Drawing.Size(993, 377);
+            this.dgvMatch.Size = new System.Drawing.Size(1054, 451);
             this.dgvMatch.TabIndex = 0;
             this.dgvMatch.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMatch_CellContentDoubleClick);
             this.dgvMatch.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvMatch_CellMouseClick);
@@ -89,6 +95,10 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.l_Closed1);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.l_Closed2);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.l_Description);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.l_TimedOutCount1);
@@ -115,9 +125,9 @@
             this.groupBox1.Controls.Add(this.l_StartTime);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(16, 12);
+            this.groupBox1.Location = new System.Drawing.Point(4, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(979, 129);
+            this.groupBox1.Size = new System.Drawing.Size(1052, 148);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Detalji meča";
@@ -145,7 +155,7 @@
             // 
             this.l_TimedOutCount1.AutoSize = true;
             this.l_TimedOutCount1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.l_TimedOutCount1.Location = new System.Drawing.Point(720, 49);
+            this.l_TimedOutCount1.Location = new System.Drawing.Point(720, 45);
             this.l_TimedOutCount1.Name = "l_TimedOutCount1";
             this.l_TimedOutCount1.Size = new System.Drawing.Size(14, 13);
             this.l_TimedOutCount1.TabIndex = 23;
@@ -154,7 +164,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(627, 49);
+            this.label11.Location = new System.Drawing.Point(627, 45);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(56, 13);
             this.label11.TabIndex = 22;
@@ -164,7 +174,7 @@
             // 
             this.l_TimedOutCount2.AutoSize = true;
             this.l_TimedOutCount2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.l_TimedOutCount2.Location = new System.Drawing.Point(720, 106);
+            this.l_TimedOutCount2.Location = new System.Drawing.Point(720, 112);
             this.l_TimedOutCount2.Name = "l_TimedOutCount2";
             this.l_TimedOutCount2.Size = new System.Drawing.Size(14, 13);
             this.l_TimedOutCount2.TabIndex = 21;
@@ -173,7 +183,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(627, 106);
+            this.label9.Location = new System.Drawing.Point(627, 112);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(56, 13);
             this.label9.TabIndex = 20;
@@ -240,7 +250,7 @@
             // 
             this.l_BanTim2.AutoSize = true;
             this.l_BanTim2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.l_BanTim2.Location = new System.Drawing.Point(720, 90);
+            this.l_BanTim2.Location = new System.Drawing.Point(720, 96);
             this.l_BanTim2.Name = "l_BanTim2";
             this.l_BanTim2.Size = new System.Drawing.Size(14, 13);
             this.l_BanTim2.TabIndex = 13;
@@ -249,7 +259,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(627, 90);
+            this.label5.Location = new System.Drawing.Point(627, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(92, 13);
             this.label5.TabIndex = 12;
@@ -259,7 +269,7 @@
             // 
             this.l_BanTim1.AutoSize = true;
             this.l_BanTim1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.l_BanTim1.Location = new System.Drawing.Point(720, 34);
+            this.l_BanTim1.Location = new System.Drawing.Point(720, 30);
             this.l_BanTim1.Name = "l_BanTim1";
             this.l_BanTim1.Size = new System.Drawing.Size(14, 13);
             this.l_BanTim1.TabIndex = 11;
@@ -268,7 +278,7 @@
             // label_ban1
             // 
             this.label_ban1.AutoSize = true;
-            this.label_ban1.Location = new System.Drawing.Point(627, 34);
+            this.label_ban1.Location = new System.Drawing.Point(627, 30);
             this.label_ban1.Name = "label_ban1";
             this.label_ban1.Size = new System.Drawing.Size(92, 13);
             this.label_ban1.TabIndex = 10;
@@ -298,7 +308,7 @@
             this.l_ScoreTeam2.AutoSize = true;
             this.l_ScoreTeam2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.l_ScoreTeam2.ForeColor = System.Drawing.Color.Red;
-            this.l_ScoreTeam2.Location = new System.Drawing.Point(880, 68);
+            this.l_ScoreTeam2.Location = new System.Drawing.Point(880, 74);
             this.l_ScoreTeam2.Name = "l_ScoreTeam2";
             this.l_ScoreTeam2.Size = new System.Drawing.Size(20, 22);
             this.l_ScoreTeam2.TabIndex = 7;
@@ -308,7 +318,7 @@
             // 
             this.l_Team2.AutoSize = true;
             this.l_Team2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.l_Team2.Location = new System.Drawing.Point(623, 68);
+            this.l_Team2.Location = new System.Drawing.Point(623, 74);
             this.l_Team2.Name = "l_Team2";
             this.l_Team2.Size = new System.Drawing.Size(66, 22);
             this.l_Team2.TabIndex = 6;
@@ -319,7 +329,7 @@
             this.l_ScoreTeam1.AutoSize = true;
             this.l_ScoreTeam1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.l_ScoreTeam1.ForeColor = System.Drawing.Color.Red;
-            this.l_ScoreTeam1.Location = new System.Drawing.Point(880, 11);
+            this.l_ScoreTeam1.Location = new System.Drawing.Point(880, 7);
             this.l_ScoreTeam1.Name = "l_ScoreTeam1";
             this.l_ScoreTeam1.Size = new System.Drawing.Size(20, 22);
             this.l_ScoreTeam1.TabIndex = 5;
@@ -329,7 +339,7 @@
             // 
             this.l_Team1.AutoSize = true;
             this.l_Team1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.l_Team1.Location = new System.Drawing.Point(623, 11);
+            this.l_Team1.Location = new System.Drawing.Point(623, 7);
             this.l_Team1.Name = "l_Team1";
             this.l_Team1.Size = new System.Drawing.Size(66, 22);
             this.l_Team1.TabIndex = 4;
@@ -390,20 +400,28 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.p_NotRegisteredMatches.Controls.Add(this.btn_GamePreview);
             this.p_NotRegisteredMatches.Controls.Add(this.dgvMatch);
-            this.p_NotRegisteredMatches.Location = new System.Drawing.Point(4, 147);
+            this.p_NotRegisteredMatches.Location = new System.Drawing.Point(4, 166);
             this.p_NotRegisteredMatches.Name = "p_NotRegisteredMatches";
-            this.p_NotRegisteredMatches.Size = new System.Drawing.Size(996, 420);
+            this.p_NotRegisteredMatches.Size = new System.Drawing.Size(1057, 494);
             this.p_NotRegisteredMatches.TabIndex = 3;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsl_Time});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 570);
+            this.pg_APIFetch,
+            this.tsl_Time,
+            this.l_DisplayCount});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 663);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1000, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1061, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // pg_APIFetch
+            // 
+            this.pg_APIFetch.Name = "pg_APIFetch";
+            this.pg_APIFetch.Size = new System.Drawing.Size(300, 16);
+            this.pg_APIFetch.Visible = false;
             // 
             // tsl_Time
             // 
@@ -411,11 +429,56 @@
             this.tsl_Time.Size = new System.Drawing.Size(12, 17);
             this.tsl_Time.Text = "-";
             // 
+            // l_DisplayCount
+            // 
+            this.l_DisplayCount.Name = "l_DisplayCount";
+            this.l_DisplayCount.Size = new System.Drawing.Size(12, 17);
+            this.l_DisplayCount.Text = "-";
+            this.l_DisplayCount.Visible = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(627, 129);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(55, 13);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Zatvoreni:";
+            // 
+            // l_Closed2
+            // 
+            this.l_Closed2.AutoSize = true;
+            this.l_Closed2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.l_Closed2.Location = new System.Drawing.Point(721, 127);
+            this.l_Closed2.Name = "l_Closed2";
+            this.l_Closed2.Size = new System.Drawing.Size(14, 13);
+            this.l_Closed2.TabIndex = 27;
+            this.l_Closed2.Text = "0";
+            // 
+            // l_Closed1
+            // 
+            this.l_Closed1.AutoSize = true;
+            this.l_Closed1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.l_Closed1.Location = new System.Drawing.Point(720, 58);
+            this.l_Closed1.Name = "l_Closed1";
+            this.l_Closed1.Size = new System.Drawing.Size(14, 13);
+            this.l_Closed1.TabIndex = 29;
+            this.l_Closed1.Text = "0";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(628, 61);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(55, 13);
+            this.label13.TabIndex = 28;
+            this.label13.Text = "Zatvoreni:";
+            // 
             // ClubMatchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 592);
+            this.ClientSize = new System.Drawing.Size(1061, 685);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.p_NotRegisteredMatches);
             this.Controls.Add(this.groupBox1);
@@ -469,5 +532,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsl_Time;
+        private System.Windows.Forms.ToolStripProgressBar pg_APIFetch;
+        private System.Windows.Forms.ToolStripStatusLabel l_DisplayCount;
+        private System.Windows.Forms.Label l_Closed1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label l_Closed2;
+        private System.Windows.Forms.Label label10;
     }
 }

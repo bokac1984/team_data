@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using API_Consumer.Common;
 using System.ComponentModel;
+using API_Consumer.ClubMatch;
 
 namespace API_Consumer.Clubs
 {
@@ -24,17 +25,13 @@ namespace API_Consumer.Clubs
             try
             {
                 var cekanje = new Waiting();
-
-                string clubUrl = ApiEndPoint + "club/" + ClubName;
-                string MatchUrl = ApiEndPoint + "club/" + ClubName + "/matches";
-
                 // upali čekanje
                 cekanje.Show();
                 // prikupi podatke od API
                 // endpoint za mečeve 
-                ClubObjekt klub = API.GetData.getApiData<ClubObjekt>(clubUrl);
+                ClubObjekt klub = api.GetClubObjekt(ClubName);
 
-                Matches mec = API.GetData.getApiData<Matches>(MatchUrl);
+                Matches mec = api.GetMatches(ClubName);
 
                 cekanje.Close();
 
@@ -102,7 +99,8 @@ namespace API_Consumer.Clubs
                 int lastSegment = int.Parse(CommonFunctions.getLastPart(dgvFinished.Rows[e.RowIndex].Cells[0].Value.ToString()));
                 ClubMatch.ClubMatchForm forma = new ClubMatch.ClubMatchForm
                 {
-                    matchId = lastSegment
+                    matchId = lastSegment,
+                    isLive = CommonFunctions.isLiveMatch(dgvFinished.Rows[e.RowIndex].Cells[0].Value.ToString())
                 };
 
                 forma.Show();
@@ -166,6 +164,33 @@ namespace API_Consumer.Clubs
         private void dgv_Registrations_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             CommonFunctions.showRightMenu(sender, e);
+        }
+
+        private void btn_Activity_Click(object sender, EventArgs e)
+        {
+            var froma = new MemberActivity(){
+                ma_ClubName = ClubName
+            };
+
+            froma.Show();
+        }
+
+        private void btn_AutoDownload_Click(object sender, EventArgs e)
+        {
+            TimerDownlaod d = new TimerDownlaod();
+            d.MatchID = CommonFunctions.getLastPart(dgv_Registrations.Rows[dgv_Registrations.CurrentCell.RowIndex].Cells[0].Value.ToString());
+            d.Show();
+        }
+
+        private void tabCtrl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabCtrl1.SelectedTab == tabCtrl1.TabPages[2])
+            {
+                btn_AutoDownload.Visible = true;
+            } else
+            {
+                btn_AutoDownload.Visible = false;
+            }
         }
     }
 }

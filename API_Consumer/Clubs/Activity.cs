@@ -18,6 +18,24 @@
         public List<Member> AllTime { get; set; }
     }
 
+    public partial class MemberDataForGrid
+    {
+        public string Username { get; set; }
+        public string Joined { get; set; }
+
+        public string JoinedSite { get; set; }
+
+        public long Notifications { get; set; }
+
+        public long NewMessages { get; set; }
+
+        public long GamesToMove { get; set; }
+
+        public long ChallengeWaiting { get; set; }
+
+        public string LastOnline { get; set; }
+    }
+
     public partial class Member
     {
         [JsonProperty("username")]
@@ -33,6 +51,8 @@
         public long GamesToMove { get; set; }
 
         public long ChallengeWaiting { get; set; }
+
+        public long LastOnline { get; set; }
 
         public override int GetHashCode()
         {

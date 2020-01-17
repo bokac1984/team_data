@@ -30,6 +30,8 @@
         {
             this.dgvFinished = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_AutoDownload = new System.Windows.Forms.Button();
+            this.btn_Activity = new System.Windows.Forms.Button();
             this.l_Registration = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.l_InProgress = new System.Windows.Forms.Label();
@@ -79,6 +81,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btn_AutoDownload);
+            this.panel1.Controls.Add(this.btn_Activity);
             this.panel1.Controls.Add(this.l_Registration);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.l_InProgress);
@@ -95,10 +99,32 @@
             this.panel1.Size = new System.Drawing.Size(942, 104);
             this.panel1.TabIndex = 6;
             // 
+            // btn_AutoDownload
+            // 
+            this.btn_AutoDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_AutoDownload.Location = new System.Drawing.Point(788, 76);
+            this.btn_AutoDownload.Name = "btn_AutoDownload";
+            this.btn_AutoDownload.Size = new System.Drawing.Size(131, 23);
+            this.btn_AutoDownload.TabIndex = 11;
+            this.btn_AutoDownload.Text = "Dodaj u automatiku";
+            this.btn_AutoDownload.UseVisualStyleBackColor = true;
+            this.btn_AutoDownload.Visible = false;
+            this.btn_AutoDownload.Click += new System.EventHandler(this.btn_AutoDownload_Click);
+            // 
+            // btn_Activity
+            // 
+            this.btn_Activity.Location = new System.Drawing.Point(7, 76);
+            this.btn_Activity.Name = "btn_Activity";
+            this.btn_Activity.Size = new System.Drawing.Size(156, 23);
+            this.btn_Activity.TabIndex = 10;
+            this.btn_Activity.Text = "Aktivnost članova";
+            this.btn_Activity.UseVisualStyleBackColor = true;
+            this.btn_Activity.Click += new System.EventHandler(this.btn_Activity_Click);
+            // 
             // l_Registration
             // 
             this.l_Registration.AutoSize = true;
-            this.l_Registration.Location = new System.Drawing.Point(352, 79);
+            this.l_Registration.Location = new System.Drawing.Point(352, 57);
             this.l_Registration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.l_Registration.Name = "l_Registration";
             this.l_Registration.Size = new System.Drawing.Size(13, 13);
@@ -108,7 +134,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(232, 79);
+            this.label5.Location = new System.Drawing.Point(232, 57);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(110, 13);
@@ -118,7 +144,7 @@
             // l_InProgress
             // 
             this.l_InProgress.AutoSize = true;
-            this.l_InProgress.Location = new System.Drawing.Point(352, 45);
+            this.l_InProgress.Location = new System.Drawing.Point(352, 32);
             this.l_InProgress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.l_InProgress.Name = "l_InProgress";
             this.l_InProgress.Size = new System.Drawing.Size(13, 13);
@@ -128,7 +154,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(232, 45);
+            this.label4.Location = new System.Drawing.Point(232, 32);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(102, 13);
@@ -158,7 +184,7 @@
             // lbl_NumPlayersValue
             // 
             this.lbl_NumPlayersValue.AutoSize = true;
-            this.lbl_NumPlayersValue.Location = new System.Drawing.Point(76, 45);
+            this.lbl_NumPlayersValue.Location = new System.Drawing.Point(76, 32);
             this.lbl_NumPlayersValue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_NumPlayersValue.Name = "lbl_NumPlayersValue";
             this.lbl_NumPlayersValue.Size = new System.Drawing.Size(13, 13);
@@ -177,7 +203,7 @@
             // lbl_NumPlayers
             // 
             this.lbl_NumPlayers.AutoSize = true;
-            this.lbl_NumPlayers.Location = new System.Drawing.Point(4, 45);
+            this.lbl_NumPlayers.Location = new System.Drawing.Point(4, 32);
             this.lbl_NumPlayers.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_NumPlayers.Name = "lbl_NumPlayers";
             this.lbl_NumPlayers.Size = new System.Drawing.Size(60, 13);
@@ -208,6 +234,7 @@
             this.tabCtrl1.SelectedIndex = 0;
             this.tabCtrl1.Size = new System.Drawing.Size(942, 427);
             this.tabCtrl1.TabIndex = 7;
+            this.tabCtrl1.SelectedIndexChanged += new System.EventHandler(this.tabCtrl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -335,5 +362,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TabPage tab_Registration;
         private System.Windows.Forms.DataGridView dgv_Registrations;
+        private System.Windows.Forms.Button btn_Activity;
+        private System.Windows.Forms.Button btn_AutoDownload;
     }
 }
