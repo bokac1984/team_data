@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Player;
 
 namespace API_Consumer.Clubs
 {
@@ -129,6 +130,7 @@ namespace API_Consumer.Clubs
             {
                 Notices n = api.GetNoticesForPlayer(m.Username);
                 Player.PlayerInfo playerInfo = api.GetPlayerInfo(m.Username);
+                PlayerStats playerStats = api.GetPlayerStats(m.Username);
 
                 m.GamesToMove = n.GamesToMove;
                 m.ChallengeWaiting = n.ChallengeWaiting;
@@ -136,6 +138,22 @@ namespace API_Consumer.Clubs
                 m.Notifications = n.Notifications;
                 m.LastOnline = CommonFunctions.FromUnixTime(playerInfo.LastOnline);
                 m.JoinedSite = CommonFunctions.FromUnixTime(playerInfo.Joined);
+                if (playerStats.Chess960_Daily != null)
+                {
+                    m.Broj960Partija = playerStats.Chess960_Daily.Record.Win + playerStats.Chess960_Daily.Record.Loss + playerStats.Chess960_Daily.Record.Draw;
+                } 
+                else
+                {
+                    m.Broj960Partija = 0;
+                }
+                if (playerStats.Chess_Daily != null)
+                {
+                    m.BrojDnevnihPartija = playerStats.Chess_Daily.Record.Win + playerStats.Chess_Daily.Record.Loss + playerStats.Chess_Daily.Record.Draw;
+                }
+                else
+                {
+                    m.BrojDnevnihPartija = 0;
+                }
 
                 progress.Report(i++);
 
@@ -173,7 +191,8 @@ namespace API_Consumer.Clubs
                     ws.Cells["F1"].Value = "GamesToMove";
                     ws.Cells["G1"].Value = "NewMessages";
                     ws.Cells["H1"].Value = "Notifications";
-                    
+                    ws.Cells["I1"].Value = "BrojDnevnih";
+                    ws.Cells["J1"].Value = "Broj960";
 
                     int i = 2;
 
@@ -190,6 +209,8 @@ namespace API_Consumer.Clubs
                         ws.Cells["F" + i.ToString()].Value = item.GamesToMove;
                         ws.Cells["G" + i.ToString()].Value = item.NewMessages;
                         ws.Cells["H" + i.ToString()].Value = item.Notifications;
+                        ws.Cells["I" + i.ToString()].Value = item.BrojDnevnihPartija;
+                        ws.Cells["J" + i.ToString()].Value = item.Broj960Partija;
                         i++;
                     }
 

@@ -34,6 +34,10 @@
         public long ChallengeWaiting { get; set; }
 
         public string LastOnline { get; set; }
+
+        public long BrojDnevnihPartija { get; set; }
+
+        public long Broj960Partija { get; set; }
     }
 
     public partial class Member
