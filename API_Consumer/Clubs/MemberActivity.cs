@@ -141,19 +141,30 @@ namespace API_Consumer.Clubs
                 if (playerStats.Chess960_Daily != null)
                 {
                     m.Broj960Partija = playerStats.Chess960_Daily.Record.Win + playerStats.Chess960_Daily.Record.Loss + playerStats.Chess960_Daily.Record.Draw;
+                    m.Current960Rating = playerStats.Chess960_Daily.Last.Rating;
+                    m.TimePerMove960 = Math.Round(((double)playerStats.Chess960_Daily.Record.TimePerMove / 60 / 60), 2);
                 } 
                 else
                 {
                     m.Broj960Partija = 0;
+                    m.Current960Rating = 0;
+                    m.TimePerMove960 = 0;
                 }
                 if (playerStats.Chess_Daily != null)
                 {
                     m.BrojDnevnihPartija = playerStats.Chess_Daily.Record.Win + playerStats.Chess_Daily.Record.Loss + playerStats.Chess_Daily.Record.Draw;
+                    m.CurrentDailyRating = playerStats.Chess_Daily.Last.Rating;
+                    m.TimePerMoveDaily = Math.Round(((double)playerStats.Chess_Daily.Record.TimePerMove / 60 / 60), 2);
                 }
                 else
                 {
                     m.BrojDnevnihPartija = 0;
+                    m.CurrentDailyRating = 0;
+                    m.TimePerMoveDaily = 0;
                 }
+                
+                
+
 
                 progress.Report(i++);
 

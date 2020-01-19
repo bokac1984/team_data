@@ -22,22 +22,18 @@
     {
         public string Username { get; set; }
         public string Joined { get; set; }
-
         public string JoinedSite { get; set; }
-
         public long Notifications { get; set; }
-
         public long NewMessages { get; set; }
-
         public long GamesToMove { get; set; }
-
         public long ChallengeWaiting { get; set; }
-
         public string LastOnline { get; set; }
-
         public long BrojDnevnihPartija { get; set; }
-
         public long Broj960Partija { get; set; }
+        public double TimePerMoveDaily { get; set; }
+        public double TimePerMove960 { get; set; }
+        public long CurrentDailyRating { get; set; }
+        public long Current960Rating { get; set; }
     }
 
     public partial class Member
