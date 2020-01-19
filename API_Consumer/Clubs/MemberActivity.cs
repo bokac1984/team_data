@@ -162,13 +162,10 @@ namespace API_Consumer.Clubs
                     m.CurrentDailyRating = 0;
                     m.TimePerMoveDaily = 0;
                 }
-                
-                
 
-
-                progress.Report(i++);
-
-                progress_Label.Text = i.ToString() + "/" + countMembers.ToString();               
+                progress_Label.Text = i.ToString() + "/" + countMembers.ToString();
+                progress.Report(i);
+                i++;
             }
         }
 
@@ -186,24 +183,34 @@ namespace API_Consumer.Clubs
                     //create a new Worksheet
                     ExcelWorksheet ws = excelPackage.Workbook.Worksheets.Add("Sheet 1");
 
-                    string nazivFajla = "aktivnost_new.xlsx";
+                    string nazivFajla = ma_ClubName + "_" + DateTime.Now.ToString("yyyyddmm") + ".xlsx";
                     string filePath = Properties.Settings.Default.Excel_location + nazivFajla;
+
+                    var headerCells = ws.Cells[1, 1, 1, 14];
+                    var headerFont = headerCells.Style.Font;
+                    headerFont.Bold = true;
+
+                    headerCells.Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thick;
 
                     if (File.Exists(filePath))
                     {
                         throw new Exception("već postoji fajl");
                     }
 
-                    ws.Cells["A1"].Value = "Username";
-                    ws.Cells["B1"].Value = "PristupioSajtu";
-                    ws.Cells["C1"].Value = "PristupioKlubu";
-                    ws.Cells["D1"].Value = "LastOnline";
+                    ws.Cells["A1"].Value = "Igrač";
+                    ws.Cells["B1"].Value = "Pristupio Sajtu";
+                    ws.Cells["C1"].Value = "Pristupio Klubu";
+                    ws.Cells["D1"].Value = "Bio online";
                     ws.Cells["E1"].Value = "ChallengeWaiting";
-                    ws.Cells["F1"].Value = "GamesToMove";
-                    ws.Cells["G1"].Value = "NewMessages";
-                    ws.Cells["H1"].Value = "Notifications";
-                    ws.Cells["I1"].Value = "BrojDnevnih";
-                    ws.Cells["J1"].Value = "Broj960";
+                    ws.Cells["F1"].Value = "Čeka se na potez";
+                    ws.Cells["G1"].Value = "Nova poruka";
+                    ws.Cells["H1"].Value = "Obavještenje";
+                    ws.Cells["I1"].Value = "Broj Dnevnih partija";
+                    ws.Cells["J1"].Value = "Rejting Dnevni";
+                    ws.Cells["K1"].Value = "h/potez Dnevni";
+                    ws.Cells["L1"].Value = "Broj 960 partija";
+                    ws.Cells["M1"].Value = "Rejting 960";
+                    ws.Cells["N1"].Value = "h/potez 960";
 
                     int i = 2;
 
@@ -221,7 +228,11 @@ namespace API_Consumer.Clubs
                         ws.Cells["G" + i.ToString()].Value = item.NewMessages;
                         ws.Cells["H" + i.ToString()].Value = item.Notifications;
                         ws.Cells["I" + i.ToString()].Value = item.BrojDnevnihPartija;
-                        ws.Cells["J" + i.ToString()].Value = item.Broj960Partija;
+                        ws.Cells["J" + i.ToString()].Value = item.CurrentDailyRating;
+                        ws.Cells["K" + i.ToString()].Value = item.TimePerMoveDaily;
+                        ws.Cells["L" + i.ToString()].Value = item.Broj960Partija;
+                        ws.Cells["M" + i.ToString()].Value = item.Current960Rating;
+                        ws.Cells["N" + i.ToString()].Value = item.TimePerMove960;
                         i++;
                     }
 

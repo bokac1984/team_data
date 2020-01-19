@@ -29,11 +29,11 @@
         public long ChallengeWaiting { get; set; }
         public string LastOnline { get; set; }
         public long BrojDnevnihPartija { get; set; }
-        public long Broj960Partija { get; set; }
-        public double TimePerMoveDaily { get; set; }
-        public double TimePerMove960 { get; set; }
         public long CurrentDailyRating { get; set; }
+        public double TimePerMoveDaily { get; set; }
+        public long Broj960Partija { get; set; }
         public long Current960Rating { get; set; }
+        public double TimePerMove960 { get; set; }
     }
 
     public partial class Member
