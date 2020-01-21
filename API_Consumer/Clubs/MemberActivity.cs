@@ -183,7 +183,7 @@ namespace API_Consumer.Clubs
                     //create a new Worksheet
                     ExcelWorksheet ws = excelPackage.Workbook.Worksheets.Add("Sheet 1");
 
-                    string nazivFajla = ma_ClubName + "_" + DateTime.Now.ToString("yyyyddmm") + ".xlsx";
+                    string nazivFajla = ma_ClubName + "_" + DateTime.Now.ToString("yyyyMMdd_hhmm") + ".xlsx";
                     string filePath = Properties.Settings.Default.Excel_location + nazivFajla;
 
                     var headerCells = ws.Cells[1, 1, 1, 14];

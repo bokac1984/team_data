@@ -205,7 +205,7 @@ namespace API_Consumer.ClubMatch.Registrations
 
                     matchLeague = matchLeague + "_" + MatchId;
 
-                    string nazivFajla = hData.Team1Name.Replace(" ", "_") + "_vs_" + hData.Team2Name.Replace(" ", "_") + matchLeague + ".xlsx";
+                    string nazivFajla = hData.Team1Name.Replace(" ", "_") + "_vs_" + hData.Team2Name.Replace(" ", "_") + matchLeague + "_" + DateTime.Now.ToString("yyyyMMdd_hhmm") + ".xlsx";
                     string filePath = ExcelLocation + nazivFajla;
 
                     if (File.Exists(filePath))
