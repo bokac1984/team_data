@@ -513,7 +513,7 @@ namespace API_Consumer.ClubMatch
 
         private void btn_GamePreview_Click(object sender, EventArgs e)
         {
-            string boardUrl = dgvMatch.CurrentRow.Cells[dgvMatch.ColumnCount-1].Value.ToString();
+            string boardUrl = dgvMatch.CurrentRow.Cells[20].Value.ToString();
             System.Diagnostics.Process.Start(boardUrl);
         }
     }
