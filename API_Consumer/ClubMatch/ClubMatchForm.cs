@@ -193,6 +193,15 @@ namespace API_Consumer.ClubMatch
 
                 foreach (var item in boardList)
                 {
+                    if (item.t1_played_as_white == "timeout" || item.t1_played_as_black == "timeout")
+                    {
+                        ToTim1++;
+                    }
+                    if (item.t2_played_as_white == "timeout" || item.t2_played_as_black == "timeout")
+                    {
+                        ToTim2++;
+                    }
+
                     foreach (var game in item.tabla.games)
                     {
                         long endTime = game.end_time == 0 ? CommonFunctions.UnixNow() : game.end_time;
@@ -207,10 +216,13 @@ namespace API_Consumer.ClubMatch
                             finished[4] = item.t1_timeout_percent.ToString();
                             finished[5] = game.white.rating.ToString();
                             finished[6] = "W";
+                            if (game.white.username == "amuske" || game.black.username == "amuske")
+                            {
+                                Console.WriteLine("test");
+                            }
                             if (game.white.result == "timeout")
                             {
                                 finished[7] = "1";
-                                ToTim1++;
                             }
                             else
                             {
@@ -236,7 +248,6 @@ namespace API_Consumer.ClubMatch
                             if (game.black.result == "timeout")
                             {
                                 finished[10] = "1";
-                                ToTim2++;
                             }
                             else
                             {
@@ -256,10 +267,14 @@ namespace API_Consumer.ClubMatch
                             finished[4] = item.t1_timeout_percent.ToString();
                             finished[5] = game.black.rating.ToString();
                             finished[6] = "B";
+
+                            if (game.white.username == "amuske" || game.black.username == "amuske")
+                            {
+                                Console.WriteLine("test");
+                            }
                             if (game.black.result == "timeout")
                             {
                                 finished[7] = "1";
-                                ToTim2++;
                             }
                             else
                             {
@@ -281,10 +296,9 @@ namespace API_Consumer.ClubMatch
                                 finished[8] = CommonFunctions.resultValue(game.black.result).ToString();
                                 finished[9] = CommonFunctions.resultValue(game.white.result).ToString();
                             }
-                            if (game.black.result == "timeout")
+                            if (game.white.result == "timeout")
                             {
                                 finished[10] = "1";
-                                ToTim1++;
                             }
                             else
                             {

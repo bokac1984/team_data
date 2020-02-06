@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +16,16 @@ namespace API_Consumer
             String responseStr = String.Empty;
             try
             {
-                using (var client = new HttpClient())
+                HttpClientHandler handler = new HttpClientHandler()
                 {
+                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                };
+
+                using (var client = new HttpClient(handler))
+                {
+                    client.DefaultRequestHeaders.Add("Contact", "apichesscom@yandex.com");
+                    client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip");
+
                     response = await client.GetAsync(u);
                 }
 

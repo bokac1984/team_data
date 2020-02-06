@@ -16,7 +16,7 @@ namespace API_Consumer.API
 
         public APIEndPoints(string ApiEPoint)
         {
-            _ApiEndPoint = ApiEPoint;
+            _ApiEndPoint = ApiEPoint;//https://bokac.free.beeceptor.com/my/api/path/";
         }
 
         public Activity getPlayerActivity(string clubName)
@@ -47,7 +47,7 @@ namespace API_Consumer.API
         public ClubMatch.ClubMatch GetClubMatch(string matchId, bool isLive)
         {
             string url = _ApiEndPoint + "match/" + (isLive ? "live/" : "") +  matchId;
-            return GetData.getApiData<ClubMatch.ClubMatch>(url);
+            return GetData.getApiData<ClubMatch.ClubMatch>(url, matchId, true);
         }
 
 
