@@ -193,11 +193,22 @@ namespace API_Consumer.ClubMatch
 
                 foreach (var item in boardList)
                 {
-                    if (item.t1_played_as_white == "timeout" || item.t1_played_as_black == "timeout")
+                    if (item.t1_played_as_white == "timeout")
                     {
                         ToTim1++;
                     }
-                    if (item.t2_played_as_white == "timeout" || item.t2_played_as_black == "timeout")
+
+                    if (item.t1_played_as_black == "timeout")
+                    {
+                        ToTim1++;
+                    }
+
+                    if (item.t2_played_as_white == "timeout")
+                    {
+                        ToTim2++;
+                    }
+
+                    if (item.t2_played_as_black == "timeout")
                     {
                         ToTim2++;
                     }
