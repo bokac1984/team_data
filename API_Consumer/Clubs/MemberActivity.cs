@@ -111,15 +111,16 @@ namespace API_Consumer.Clubs
 
             foreach (var item in allMembers)
             {
-                MemberDataForGrid memberDataItem = new MemberDataForGrid();
-                memberDataItem.Username = item.Username;
-                memberDataItem.LastOnline = CommonFunctions.FromUnixTime(item.LastOnline);
-                memberDataItem.Joined = CommonFunctions.FromUnixTime(item.Joined);
-                memberDataItem.ChallengeWaiting = item.ChallengeWaiting;
-                memberDataItem.GamesToMove = item.GamesToMove;
-                memberDataItem.NewMessages = item.NewMessages;
-                memberDataItem.Notifications = item.Notifications;
-                memberDataItem.JoinedSite = "";
+                MemberDataForGrid memberDataItem = new MemberDataForGrid() {
+                    Username = item.Username,
+                    LastOnline = CommonFunctions.FromUnixTime(item.LastOnline),
+                    Joined = CommonFunctions.FromUnixTime(item.Joined),
+                    ChallengeWaiting = item.ChallengeWaiting,
+                    GamesToMove = item.GamesToMove,
+                    NewMessages = item.NewMessages,
+                    Notifications = item.Notifications,
+                    JoinedSite = ""
+                };
                 _hs_members.Add(memberDataItem);
             }
 
@@ -218,8 +219,7 @@ namespace API_Consumer.Clubs
 
                     string nazivFajla = ma_ClubName + "_" + DateTime.Now.ToString("yyyyMMdd_hhmm") + ".xlsx";
                     string filePath = Properties.Settings.Default.Excel_location + nazivFajla;
-
-                    var headerCells = ws.Cells[1, 1, 1, 14];
+                    var headerCells = ws.Cells[1, 1, 1, 20];
                     var headerFont = headerCells.Style.Font;
                     headerFont.Bold = true;
 
@@ -244,6 +244,12 @@ namespace API_Consumer.Clubs
                     ws.Cells["L1"].Value = "Broj 960 partija";
                     ws.Cells["M1"].Value = "Rejting 960";
                     ws.Cells["N1"].Value = "h/potez 960";
+                    ws.Cells["O1"].Value = "Broj Rapid partija";
+                    ws.Cells["P1"].Value = "Rejting Rapid";
+                    ws.Cells["Q1"].Value = "Broj Blitz partija";
+                    ws.Cells["R1"].Value = "Rejting Blitz";
+                    ws.Cells["S1"].Value = "Broj Bullet partija";
+                    ws.Cells["T1"].Value = "Rejting Bullet";
 
                     int i = 2;
 
@@ -266,6 +272,12 @@ namespace API_Consumer.Clubs
                         ws.Cells["L" + i.ToString()].Value = item.Broj960Partija;
                         ws.Cells["M" + i.ToString()].Value = item.Current960Rating;
                         ws.Cells["N" + i.ToString()].Value = item.TimePerMove960;
+                        ws.Cells["O" + i.ToString()].Value = item.BrojRapidPartija;
+                        ws.Cells["P" + i.ToString()].Value = item.CurrentRapidRating;
+                        ws.Cells["Q" + i.ToString()].Value = item.BrojBlitzPartija;
+                        ws.Cells["R" + i.ToString()].Value = item.CurrentBlitzRating;
+                        ws.Cells["S" + i.ToString()].Value = item.BrojBulletPartija;
+                        ws.Cells["T" + i.ToString()].Value = item.CurrentBulletRating;
                         i++;
                     }
 
