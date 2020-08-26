@@ -163,6 +163,39 @@ namespace API_Consumer.Clubs
                     m.TimePerMoveDaily = 0;
                 }
 
+                if (playerStats.Chess_Rapid != null)
+                {
+                    m.BrojRapidPartija = playerStats.Chess_Rapid.Record.Win + playerStats.Chess_Rapid.Record.Loss + playerStats.Chess_Rapid.Record.Draw;
+                    m.CurrentRapidRating = playerStats.Chess_Rapid.Last.Rating;
+                }
+                else
+                {
+                    m.BrojRapidPartija = 0;
+                    m.CurrentRapidRating = 0;
+                }
+
+                if (playerStats.Chess_Blitz != null)
+                {
+                    m.BrojBlitzPartija = playerStats.Chess_Blitz.Record.Win + playerStats.Chess_Blitz.Record.Loss + playerStats.Chess_Blitz.Record.Draw;
+                    m.CurrentBlitzRating = playerStats.Chess_Blitz.Last.Rating;
+                }
+                else
+                {
+                    m.BrojBlitzPartija = 0;
+                    m.CurrentBlitzRating = 0;
+                }
+
+                if (playerStats.Chess_Bullet != null)
+                {
+                    m.BrojBulletPartija = playerStats.Chess_Bullet.Record.Win + playerStats.Chess_Bullet.Record.Loss + playerStats.Chess_Bullet.Record.Draw;
+                    m.CurrentBulletRating = playerStats.Chess_Bullet.Last.Rating;
+                }
+                else
+                {
+                    m.BrojBulletPartija = 0;
+                    m.CurrentBulletRating = 0;
+                }
+
                 progress_Label.Text = i.ToString() + "/" + countMembers.ToString();
                 progress.Report(i);
                 i++;

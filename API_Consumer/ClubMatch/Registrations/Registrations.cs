@@ -109,7 +109,7 @@
         public Status Status { get; set; }
     }
 
-    public enum Status { Basic, Premium, Staff };
+    public enum Status { Basic, Premium, Staff, Closed, ClosedFairPlay };
 
     internal static class Converter
     {
@@ -141,6 +141,10 @@
                     return Status.Premium;
                 case "staff":
                     return Status.Premium;
+                case "closed":
+                    return Status.Closed;
+                case "closed:fair_play_violations":
+                    return Status.ClosedFairPlay;
             }
             throw new Exception("Cannot unmarshal type Status");
         }
@@ -163,6 +167,12 @@
                     return;
                 case Status.Staff:
                     serializer.Serialize(writer, "staff");
+                    return;
+                case Status.Closed:
+                    serializer.Serialize(writer, "closed");
+                    return;
+                case Status.ClosedFairPlay:
+                    serializer.Serialize(writer, "closed:fair_play_violations");
                     return;
             }
             throw new Exception("Cannot marshal type Status");

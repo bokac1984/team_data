@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Dynamic;
     using Newtonsoft.Json;
 
 
@@ -34,6 +34,16 @@
         public long Broj960Partija { get; set; }
         public long Current960Rating { get; set; }
         public double TimePerMove960 { get; set; }
+
+        // Sad rapid
+        public long CurrentRapidRating { get; set; }
+        public long BrojRapidPartija { get; set; }
+
+        public long CurrentBlitzRating { get; set; }
+        public long BrojBlitzPartija { get; set; }
+
+        public long CurrentBulletRating { get; set; }
+        public long BrojBulletPartija { get; set; }
     }
 
     public partial class Member
