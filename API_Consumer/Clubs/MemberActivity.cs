@@ -306,7 +306,7 @@ namespace API_Consumer.Clubs
 
                     //write the file to the disk
                     File.WriteAllBytes(filePath, bin);
-                    statusna_labela.Text = "Excel saved!";
+                    statusna_labela.Text = $"Excel saved at {filePath}!";
                 }
             }
             catch (Exception ex)
