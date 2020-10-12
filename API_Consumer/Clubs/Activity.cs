@@ -31,19 +31,25 @@
         public long BrojDnevnihPartija { get; set; }
         public long CurrentDailyRating { get; set; }
         public double TimePerMoveDaily { get; set; }
+        public long RDDaily { get; set; }
+
         public long Broj960Partija { get; set; }
         public long Current960Rating { get; set; }
+        public long RD960Daily { get; set; }
         public double TimePerMove960 { get; set; }
 
         // Sad rapid
         public long CurrentRapidRating { get; set; }
         public long BrojRapidPartija { get; set; }
+        public long RDRapid { get; set; }
 
         public long CurrentBlitzRating { get; set; }
         public long BrojBlitzPartija { get; set; }
+        public long RDBlitz { get; set; }
 
         public long CurrentBulletRating { get; set; }
         public long BrojBulletPartija { get; set; }
+        public long RDBullet { get; set; }
     }
 
     public partial class Member

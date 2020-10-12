@@ -144,57 +144,67 @@ namespace API_Consumer.Clubs
                     m.Broj960Partija = playerStats.Chess960_Daily.Record.Win + playerStats.Chess960_Daily.Record.Loss + playerStats.Chess960_Daily.Record.Draw;
                     m.Current960Rating = playerStats.Chess960_Daily.Last.Rating;
                     m.TimePerMove960 = Math.Round(((double)playerStats.Chess960_Daily.Record.TimePerMove / 60 / 60), 2);
+                    m.RD960Daily = playerStats.Chess960_Daily.Last.Rd;
                 } 
                 else
                 {
                     m.Broj960Partija = 0;
                     m.Current960Rating = 0;
                     m.TimePerMove960 = 0;
+                    m.RD960Daily = 0;
                 }
                 if (playerStats.Chess_Daily != null)
                 {
                     m.BrojDnevnihPartija = playerStats.Chess_Daily.Record.Win + playerStats.Chess_Daily.Record.Loss + playerStats.Chess_Daily.Record.Draw;
                     m.CurrentDailyRating = playerStats.Chess_Daily.Last.Rating;
                     m.TimePerMoveDaily = Math.Round(((double)playerStats.Chess_Daily.Record.TimePerMove / 60 / 60), 2);
+                    m.RDDaily = playerStats.Chess_Daily.Last.Rd;
                 }
                 else
                 {
                     m.BrojDnevnihPartija = 0;
                     m.CurrentDailyRating = 0;
                     m.TimePerMoveDaily = 0;
+                    m.RDDaily = 0;
                 }
 
                 if (playerStats.Chess_Rapid != null)
                 {
                     m.BrojRapidPartija = playerStats.Chess_Rapid.Record.Win + playerStats.Chess_Rapid.Record.Loss + playerStats.Chess_Rapid.Record.Draw;
                     m.CurrentRapidRating = playerStats.Chess_Rapid.Last.Rating;
+                    m.RDRapid = playerStats.Chess_Rapid.Last.Rd;
                 }
                 else
                 {
                     m.BrojRapidPartija = 0;
                     m.CurrentRapidRating = 0;
+                    m.RDRapid = 0;
                 }
 
                 if (playerStats.Chess_Blitz != null)
                 {
                     m.BrojBlitzPartija = playerStats.Chess_Blitz.Record.Win + playerStats.Chess_Blitz.Record.Loss + playerStats.Chess_Blitz.Record.Draw;
                     m.CurrentBlitzRating = playerStats.Chess_Blitz.Last.Rating;
+                    m.RDBlitz = playerStats.Chess_Blitz.Last.Rd;
                 }
                 else
                 {
                     m.BrojBlitzPartija = 0;
                     m.CurrentBlitzRating = 0;
+                    m.RDBlitz = 0;
                 }
 
                 if (playerStats.Chess_Bullet != null)
                 {
                     m.BrojBulletPartija = playerStats.Chess_Bullet.Record.Win + playerStats.Chess_Bullet.Record.Loss + playerStats.Chess_Bullet.Record.Draw;
                     m.CurrentBulletRating = playerStats.Chess_Bullet.Last.Rating;
+                    m.RDBullet = playerStats.Chess_Bullet.Last.Rd;
                 }
                 else
                 {
                     m.BrojBulletPartija = 0;
                     m.CurrentBulletRating = 0;
+                    m.RDBullet = 0;
                 }
 
                 progress_Label.Text = i.ToString() + "/" + countMembers.ToString();
@@ -219,7 +229,7 @@ namespace API_Consumer.Clubs
 
                     string nazivFajla = ma_ClubName + "_" + DateTime.Now.ToString("yyyyMMdd_hhmm") + ".xlsx";
                     string filePath = Properties.Settings.Default.Excel_location + nazivFajla;
-                    var headerCells = ws.Cells[1, 1, 1, 20];
+                    var headerCells = ws.Cells[1, 1, 1, 24];
                     var headerFont = headerCells.Style.Font;
                     headerFont.Bold = true;
 
@@ -250,6 +260,10 @@ namespace API_Consumer.Clubs
                     ws.Cells["R1"].Value = "Rejting Blitz";
                     ws.Cells["S1"].Value = "Broj Bullet partija";
                     ws.Cells["T1"].Value = "Rejting Bullet";
+                    ws.Cells["U1"].Value = "Glicko Dnevni";
+                    ws.Cells["V1"].Value = "Glicko Dnevni960";
+                    ws.Cells["W1"].Value = "Glicko Blitz";
+                    ws.Cells["X1"].Value = "Glicko Bullet";
 
                     int i = 2;
 
@@ -278,6 +292,10 @@ namespace API_Consumer.Clubs
                         ws.Cells["R" + i.ToString()].Value = item.CurrentBlitzRating;
                         ws.Cells["S" + i.ToString()].Value = item.BrojBulletPartija;
                         ws.Cells["T" + i.ToString()].Value = item.CurrentBulletRating;
+                        ws.Cells["U" + i.ToString()].Value = item.RDDaily;
+                        ws.Cells["V" + i.ToString()].Value = item.RD960Daily;
+                        ws.Cells["W" + i.ToString()].Value = item.RDBlitz;
+                        ws.Cells["X" + i.ToString()].Value = item.RDBullet;
                         i++;
                     }
 
