@@ -89,7 +89,22 @@ namespace API_Consumer.Clubs
                 }
             };
 
+            dgv.RowPrePaint += new DataGridViewRowPrePaintEventHandler(changeColorOfLiveMatchRows);
+
             dgv.Sort(dgv.Columns[3], ListSortDirection.Descending);
+        }
+
+        private void changeColorOfLiveMatchRows(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            var dataGridView = sender as DataGridView;
+            if (dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString().Contains("live"))
+            {
+                dataGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.LightSeaGreen;
+            }
+            else
+            {
+                dataGridView.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.AliceBlue;
+            }
         }
 
         private void dgvFinished_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

@@ -229,7 +229,7 @@ namespace API_Consumer.Clubs
 
                     string nazivFajla = ma_ClubName + "_" + DateTime.Now.ToString("yyyyMMdd_hhmm") + ".xlsx";
                     string filePath = Properties.Settings.Default.Excel_location + nazivFajla;
-                    var headerCells = ws.Cells[1, 1, 1, 24];
+                    var headerCells = ws.Cells[1, 1, 1, 25];
                     var headerFont = headerCells.Style.Font;
                     headerFont.Bold = true;
 
@@ -264,6 +264,7 @@ namespace API_Consumer.Clubs
                     ws.Cells["V1"].Value = "Glicko Dnevni960";
                     ws.Cells["W1"].Value = "Glicko Blitz";
                     ws.Cells["X1"].Value = "Glicko Bullet";
+                    ws.Cells["Y1"].Value = "Glicko Rapid";
 
                     int i = 2;
 
@@ -296,6 +297,7 @@ namespace API_Consumer.Clubs
                         ws.Cells["V" + i.ToString()].Value = item.RD960Daily;
                         ws.Cells["W" + i.ToString()].Value = item.RDBlitz;
                         ws.Cells["X" + i.ToString()].Value = item.RDBullet;
+                        ws.Cells["Y" + i.ToString()].Value = item.RDRapid;
                         i++;
                     }
 
