@@ -15,6 +15,9 @@ namespace API_Consumer.ClubMatch
     public partial class RegistrationForm : InitForm
     {
         public int matchId { get; set; }
+
+        public bool isLive { get; set; }
+
         public RegistrationForm()
         {
             InitializeComponent();
@@ -24,7 +27,7 @@ namespace API_Consumer.ClubMatch
         {
             p_Register.Visible = true;
 
-            string url = ApiEndPoint + "match/" + matchId.ToString();
+            string url = ApiEndPoint + "match/" + (isLive ? "live/" : "") + matchId.ToString();
 
             var cekanje = new Waiting();
 
@@ -46,7 +49,15 @@ namespace API_Consumer.ClubMatch
             l_Team2.Text = mec.Teams.Team2.Name;
 
             l_Autostart.Text = mec.Settings.Autostart ? "Da" : "Ne";
-            l_Tempo.Text = (int.Parse( mec.Settings.TimeControl.Split('/')[1]) / 86400 ).ToString() + "d";
+
+
+            if (mec.Settings.TimeControl.Contains("/")) {
+                l_Tempo.Text =  (int.Parse(mec.Settings.TimeControl.Split('/')[1]) / 86400).ToString() + "d";
+            } else
+            {
+                l_Tempo.Text = (int.Parse(mec.Settings.TimeControl) / 60).ToString() + "m";
+            }
+
             l_MinGames.Text = mec.Settings.MinRequiredGames.ToString();
             l_MinPlayers.Text = mec.Settings.MinTeamPlayers.ToString();
             l_Type.Text = mec.Settings.Rules.ToString() == "chess960" ? "960" : "Standard";
@@ -163,6 +174,8 @@ namespace API_Consumer.ClubMatch
 
             var source = new BindingSource();
             source.DataSource = mec;
+            dgv_Register.Refresh();
+            dgv_Register.DataSource = null;
             dgv_Register.DataSource = tabele;
 
             dgv_Register.Columns[0].HeaderText = mec.Teams.Team1.Name;
@@ -200,6 +213,11 @@ namespace API_Consumer.ClubMatch
         private void dgv_Register_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             CommonFunctions.viewPlayer(sender, 0, 9);
+        }
+
+        private void btn_Registration_Refresh_Click(object sender, EventArgs e)
+        {
+            this.ShowRegistrations();
         }
     }
 }

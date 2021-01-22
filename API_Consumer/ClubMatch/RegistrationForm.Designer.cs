@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_Registration_Refresh = new System.Windows.Forms.Button();
             this.l_Autostart = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.l_MinGames = new System.Windows.Forms.Label();
@@ -64,6 +65,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btn_Registration_Refresh);
             this.groupBox1.Controls.Add(this.l_Autostart);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.l_MinGames);
@@ -94,6 +96,17 @@
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Detalji meča";
+            // 
+            // btn_Registration_Refresh
+            // 
+            this.btn_Registration_Refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Registration_Refresh.Location = new System.Drawing.Point(1015, 10);
+            this.btn_Registration_Refresh.Name = "btn_Registration_Refresh";
+            this.btn_Registration_Refresh.Size = new System.Drawing.Size(151, 23);
+            this.btn_Registration_Refresh.TabIndex = 38;
+            this.btn_Registration_Refresh.Text = "Refresh";
+            this.btn_Registration_Refresh.UseVisualStyleBackColor = true;
+            this.btn_Registration_Refresh.Click += new System.EventHandler(this.btn_Registration_Refresh_Click);
             // 
             // l_Autostart
             // 
@@ -398,5 +411,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label l_MinPlayers;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button btn_Registration_Refresh;
     }
 }

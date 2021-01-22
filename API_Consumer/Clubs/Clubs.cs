@@ -162,9 +162,10 @@ namespace API_Consumer.Clubs
             try
             {
                 int lastSegment = int.Parse(CommonFunctions.getLastPart(dgv_Registrations.Rows[e.RowIndex].Cells[0].Value.ToString()));
-                ClubMatch.RegistrationForm forma = new ClubMatch.RegistrationForm
+                RegistrationForm forma = new RegistrationForm
                 {
-                    matchId = lastSegment
+                    matchId = lastSegment,
+                    isLive = dgv_Registrations.Rows[e.RowIndex].Cells[0].Value.ToString().Contains("live")
                 };
 
                 forma.Show();

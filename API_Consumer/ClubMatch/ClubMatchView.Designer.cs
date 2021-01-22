@@ -32,6 +32,7 @@
             this.btn_Pregled = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cb_Registration = new System.Windows.Forms.CheckBox();
+            this.cb_liveMatch = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // tb_matchId
@@ -39,16 +40,16 @@
             this.tb_matchId.Location = new System.Drawing.Point(25, 34);
             this.tb_matchId.Margin = new System.Windows.Forms.Padding(2);
             this.tb_matchId.Name = "tb_matchId";
-            this.tb_matchId.Size = new System.Drawing.Size(134, 20);
+            this.tb_matchId.Size = new System.Drawing.Size(183, 20);
             this.tb_matchId.TabIndex = 0;
             this.tb_matchId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_matchId_KeyPress);
             // 
             // btn_Pregled
             // 
-            this.btn_Pregled.Location = new System.Drawing.Point(179, 34);
+            this.btn_Pregled.Location = new System.Drawing.Point(225, 34);
             this.btn_Pregled.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Pregled.Name = "btn_Pregled";
-            this.btn_Pregled.Size = new System.Drawing.Size(126, 37);
+            this.btn_Pregled.Size = new System.Drawing.Size(126, 75);
             this.btn_Pregled.TabIndex = 1;
             this.btn_Pregled.Text = "Pregled";
             this.btn_Pregled.UseVisualStyleBackColor = true;
@@ -66,18 +67,29 @@
             // cb_Registration
             // 
             this.cb_Registration.AutoSize = true;
-            this.cb_Registration.Location = new System.Drawing.Point(25, 59);
+            this.cb_Registration.Location = new System.Drawing.Point(25, 69);
             this.cb_Registration.Name = "cb_Registration";
             this.cb_Registration.Size = new System.Drawing.Size(134, 17);
             this.cb_Registration.TabIndex = 3;
             this.cb_Registration.Text = "Meč u fazi registracije?";
             this.cb_Registration.UseVisualStyleBackColor = true;
             // 
+            // cb_liveMatch
+            // 
+            this.cb_liveMatch.AutoSize = true;
+            this.cb_liveMatch.Location = new System.Drawing.Point(25, 92);
+            this.cb_liveMatch.Name = "cb_liveMatch";
+            this.cb_liveMatch.Size = new System.Drawing.Size(75, 17);
+            this.cb_liveMatch.TabIndex = 4;
+            this.cb_liveMatch.Text = "Meč uživo";
+            this.cb_liveMatch.UseVisualStyleBackColor = true;
+            // 
             // ClubMatchView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 104);
+            this.ClientSize = new System.Drawing.Size(362, 142);
+            this.Controls.Add(this.cb_liveMatch);
             this.Controls.Add(this.cb_Registration);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_Pregled);
@@ -97,5 +109,6 @@
         private System.Windows.Forms.Button btn_Pregled;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox cb_Registration;
+        private System.Windows.Forms.CheckBox cb_liveMatch;
     }
 }

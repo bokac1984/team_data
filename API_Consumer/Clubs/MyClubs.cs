@@ -22,6 +22,9 @@
         [JsonProperty("country")]
         public Uri Country { get; set; }
 
+        [JsonProperty("location")]
+        public string Location { get; set; }
+
         [JsonProperty("average_daily_rating")]
         public long AverageDailyRating { get; set; }
 
@@ -46,8 +49,8 @@
         [JsonProperty("icon")]
         public Uri Icon { get; set; }
 
-        [JsonProperty("description")]
-        public string Description { get; set; }
+        //[JsonProperty("description")]
+        //public string Description { get; set; }
 
         [JsonProperty("url")]
         public Uri Url { get; set; }

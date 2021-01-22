@@ -379,7 +379,162 @@ namespace API_Consumer.ClubMatch
 
         }
 
-        private void DoWork(IProgress<int> progress)
+        private void DoWorkLive(IProgress<int> progress)
+        {
+            team1PlayersRemoved = new List<string>();
+            team2PlayersRemoved = new List<string>();
+
+            foreach (var item in mec.teams.team1.fair_play_removals)
+            {
+                team1PlayersRemoved.Add(item.ToUpper());
+            }
+
+            foreach (var item in mec.teams.team2.fair_play_removals)
+            {
+                team2PlayersRemoved.Add(item.ToUpper());
+            }
+
+            var team1 = from t in mec.teams.team1.players
+                        select t;
+
+            var team2 = from t in mec.teams.team2.players
+                        select t;
+
+            
+
+            var boards = from t1 in team1
+                         from t2 in team2
+                         select new
+                         {
+                             t1_username = t1.username,
+                             t1_status = t1.status,
+                             t1_played_as_white = t1.played_as_white,
+                             t1_played_as_black = t1.played_as_black,
+                             t1_timeout_percent = t1.timeout_percent,
+                             t2_username = t2.username,
+                             t2_status = t2.status,
+                             t2_played_as_white = t2.played_as_white,
+                             t2_played_as_black = t2.played_as_black,
+                             t2_timeout_percent = t2.timeout_percent,
+                             board_url = t1.board,
+                             board_number = 0
+                         };
+            boardList = new List<Tabla>();
+            dynamic Tabla = new ExpandoObject();
+
+            var tabele = new List<dynamic>();
+
+            int i = 1;
+            foreach (var board in boards)
+            {
+                Tabla tt = new Tabla()
+                {
+                    t1_username = board.t1_username,
+                    t1_played_as_black = board.t1_played_as_black,
+                    t1_played_as_white = board.t1_played_as_white,
+                    t1_status = board.t1_status,
+                    t1_timeout_percent = board.t1_timeout_percent,
+                    t2_played_as_black = board.t2_played_as_black,
+                    t2_played_as_white = board.t2_played_as_white,
+                    t2_status = board.t2_status,
+                    t2_username = board.t2_username,
+                    t2_timeout_percent = board.t2_timeout_percent,
+                    board_url = board.board_url,
+                    board_number = board.board_number
+                };
+                if (!isLive)
+                {
+                    if (board.t1_played_as_white == null || board.t1_played_as_black == null)
+                    {
+                        GameInProgress.Board bb = api.GetBoard<GameInProgress.Board>(board.board_url);
+                        List<Game> games = new List<Game>();
+                        foreach (var g in bb.games)
+                        {
+                            Game game1 = new Game();
+                            Color w = new Color();
+                            Color b = new Color();
+                            if (g.white is string)
+                            {
+                                string username = CommonFunctions.getLastPart(g.white.ToString());
+                                w.username = username;
+                                w.result = "-"; // ako ga nema da stavi prazno za skor
+                                w.status = "basic";
+                                g.white = w;
+                            }
+                            else
+                            {
+                                w = CommonFunctions.getDeserializedObject<Color>(g.white);
+                                g.white = b;
+                            }
+
+                            if (g.black is string)
+                            {
+                                string username = CommonFunctions.getLastPart(g.black.ToString());
+                                b.username = username;
+                                b.result = "-"; // isto i za crnog
+                                b.status = "basic";
+                                g.black = w;
+                            }
+                            else
+                            {
+                                b = CommonFunctions.getDeserializedObject<Color>(g.black);
+                                g.black = b;
+                            }
+
+                            game1.start_time = g.start_time;
+                            game1.end_time = g.end_time;
+                            game1.url = g.url;
+                            game1.white = w;
+                            game1.black = b;
+
+                            if (board.t1_username.ToUpper() == game1.black.username.ToUpper() && board.t2_username.ToUpper() == game1.white.username.ToUpper())
+                            {
+                                game1.black.team = "team1";
+                                game1.white.team = "team2";
+                            }
+                            else
+                            {
+                                game1.black.team = "team2";
+                                game1.white.team = "team1";
+                            }
+
+                            games.Add(game1);
+                        }
+                        tt.tabla = new Board() { games = games };
+                    }
+                    else
+                    {
+                        Board b = api.GetBoard<Board>(board.board_url);
+                        foreach (var item in b.games)
+                        {
+                            if (board.t1_username.ToUpper() == item.black.username.ToUpper() && board.t2_username.ToUpper() == item.white.username.ToUpper())
+                            {
+                                item.black.team = "team1";
+                                item.white.team = "team2";
+                            }
+                            else
+                            {
+                                item.black.team = "team2";
+                                item.white.team = "team1";
+                            }
+                        }
+                        tt.tabla = b;
+                    }
+                }
+
+
+                boardList.Add(tt);
+                l_DisplayCount.Text = i.ToString() + "/" + mec.boards;
+                if (i <= mec.boards)
+                {
+                    progress.Report(i);
+                }    
+
+                i++;
+            }
+        }
+
+        private void DoWorkDaily(IProgress<int> progress)
         {
 
             team1PlayersRemoved = new List<string>();
@@ -523,6 +678,17 @@ namespace API_Consumer.ClubMatch
                 boardList.Add(tt);
                 l_DisplayCount.Text = i.ToString() + "/" + mec.boards;
                 progress.Report(i++);
+            }
+        }
+
+        private void DoWork(IProgress<int> progress)
+        {
+            if (isLive)
+            {
+                DoWorkLive(progress);
+            } else
+            {
+                DoWorkDaily(progress);
             }
         }
 

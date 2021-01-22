@@ -19,7 +19,8 @@ namespace API_Consumer.ClubMatch
                 {
                     RegistrationForm a = new RegistrationForm()
                     {
-                        matchId = int.Parse(tb_matchId.Text)
+                        matchId = int.Parse(tb_matchId.Text),
+                        isLive = cb_liveMatch.Checked
                     };
 
                     a.Show();
@@ -27,7 +28,7 @@ namespace API_Consumer.ClubMatch
                 {
                     ClubMatchForm _ClubMatchForm = new ClubMatchForm();
                     _ClubMatchForm.matchId = int.Parse(tb_matchId.Text);
-
+                    _ClubMatchForm.isLive = cb_liveMatch.Checked;
                     _ClubMatchForm.Show();
                 }
 

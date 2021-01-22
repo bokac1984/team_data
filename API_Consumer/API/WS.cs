@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace API_Consumer
 {
@@ -18,13 +19,13 @@ namespace API_Consumer
             {
                 HttpClientHandler handler = new HttpClientHandler()
                 {
-                    AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                    //AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
                 };
 
                 using (var client = new HttpClient(handler))
                 {
-                    client.DefaultRequestHeaders.Add("Contact", "apichesscom@yandex.com");
-                    client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip");
+                    //client.DefaultRequestHeaders.Add("Contact", "apichesscom@yandex.com");
+                    //client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip");
 
                     response = await client.GetAsync(u);
                 }
@@ -33,7 +34,7 @@ namespace API_Consumer
             }
             catch (Exception e)
             {
-                throw new Exception("Greška prilikom poziva WS.PostAsync metode: " + e.Message);
+                throw new Exception("Greška prilikom poziva WS.PostAsync metode: " + e.Message + +'\n' + e.StackTrace);
             }
             return responseStr;
         }
@@ -49,9 +50,9 @@ namespace API_Consumer
 
                 rezultat = t.Result;
             }
-            catch
+            catch (Exception e)
             {
-                throw;
+                MessageBox.Show("greska: " + e.Message + '\n' + e.StackTrace);
             }
 
             return rezultat;
