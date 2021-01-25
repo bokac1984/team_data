@@ -181,10 +181,10 @@ namespace API_Consumer.Clubs
         {
             int selectedrowindex = dgv_Clubs.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgv_Clubs.Rows[selectedrowindex];
-
+            string image = selectedRow.Cells[11].Value != null ? selectedRow.Cells[11].Value.ToString() : "";
             try
             {
-                pb_ClubIcon.Load(selectedRow.Cells[11].Value != null ? selectedRow.Cells[11].Value.ToString() : "");
+                pb_ClubIcon.LoadAsync(image);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
 

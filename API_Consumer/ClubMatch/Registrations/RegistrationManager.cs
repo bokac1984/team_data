@@ -17,9 +17,9 @@ namespace API_Consumer.ClubMatch.Registrations
 
         public HeaderData hData { get; set; }
 
-        private string MatchId;
+        private readonly string MatchId;
 
-        private string ExcelLocation;
+        private readonly string ExcelLocation;
 
         public List<dynamic> MatchData { get; set; }
 
@@ -64,7 +64,7 @@ namespace API_Consumer.ClubMatch.Registrations
             }
             catch (Exception ex)
             {
-                //
+                MessageBox.Show("Greška uhvaćena!" + ex.Message);
             }
         }
         /// <summary>
