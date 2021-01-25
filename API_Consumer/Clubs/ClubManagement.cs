@@ -182,18 +182,18 @@ namespace API_Consumer.Clubs
             int selectedrowindex = dgv_Clubs.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgv_Clubs.Rows[selectedrowindex];
 
-            //try
-            //{
-            //    pb_ClubIcon.LoadAsync(selectedRow.Cells[10].Value != null ? selectedRow.Cells[11].Value.ToString() : "");
-            //}
-            //catch (Exception ex){ MessageBox.Show(ex.Message); }
+            try
+            {
+                pb_ClubIcon.Load(selectedRow.Cells[11].Value != null ? selectedRow.Cells[11].Value.ToString() : "");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
 
             l_Name.Text = selectedRow.Cells[1].Value.ToString();
-            l_MembersCount.Text = selectedRow.Cells[5].Value.ToString();
-            l_AvgDailyRating.Text = selectedRow.Cells[4].Value.ToString();
-            l_Created.Text = CommonFunctions.FromUnixTime((long)selectedRow.Cells[6].Value);
-            l_LastActivity.Text = CommonFunctions.FromUnixTime((long)selectedRow.Cells[7].Value);
-            l_Description.Text = selectedRow.Cells[11].Value != null ? selectedRow.Cells[11].Value.ToString() : "";
+            l_MembersCount.Text = selectedRow.Cells[6].Value.ToString();
+            l_AvgDailyRating.Text = selectedRow.Cells[5].Value == null ? "" : selectedRow.Cells[5].Value.ToString();
+            l_Created.Text = CommonFunctions.FromUnixTime((long)selectedRow.Cells[7].Value);
+            l_LastActivity.Text = CommonFunctions.FromUnixTime((long)selectedRow.Cells[8].Value);
+            //l_Description.Text = selectedRow.Cells[11].Value != null ? selectedRow.Cells[11].Value.ToString() : "";
         }
 
         private void dgv_Clubs_SelectionChanged(object sender, EventArgs e)
