@@ -107,7 +107,10 @@ namespace API_Consumer.ClubMatch
                 l_StartTime.Text = CommonFunctions.FromUnixTime(mec.start_time);
                 l_EndTime.Text = CommonFunctions.FromUnixTime(mec.end_time);
 
-                l_Duration.Text = Math.Round((CommonFunctions.FromUnixTimeDateTime(mec.end_time == 0 ? CommonFunctions.UnixNow() : mec.end_time) - CommonFunctions.FromUnixTimeDateTime(mec.start_time)).TotalDays, 2).ToString() + " dana";
+                l_Duration.Text = Math.Round(isLive == false ? 
+                    (CommonFunctions.FromUnixTimeDateTime(mec.end_time == 0 ? CommonFunctions.UnixNow() : mec.end_time) - CommonFunctions.FromUnixTimeDateTime(mec.start_time)).TotalDays
+                    : (CommonFunctions.FromUnixTimeDateTime(mec.end_time == 0 ? CommonFunctions.UnixNow() : mec.end_time) - CommonFunctions.FromUnixTimeDateTime(mec.start_time)).TotalMinutes
+                    , 2).ToString() + (isLive == false ? " dana" : "minuta");
 
                 dgvMatch.ColumnCount = brojkolona;
                 dgvMatch.Columns[0].Name = "Pocetak Meča";
@@ -118,7 +121,7 @@ namespace API_Consumer.ClubMatch
                 //dgvMatch.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvMatch.Columns[1].Width = 120;
 
-                dgvMatch.Columns[2].Name = "Trajanje (dana)";
+                dgvMatch.Columns[2].Name = isLive == true ? "Trajanje (minuta)" : "Trajanje (dana)";
                 //dgvMatch.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvMatch.Columns[2].Width = 50;
 
@@ -216,9 +219,13 @@ namespace API_Consumer.ClubMatch
                     foreach (var game in item.tabla.games)
                     {
                         long endTime = game.end_time == 0 ? CommonFunctions.UnixNow() : game.end_time;
-                        finished[0] = CommonFunctions.FromUnixTime(game.start_time);
+                        finished[0] = CommonFunctions.FromUnixTime(mec.start_time);
                         finished[1] = CommonFunctions.FromUnixTime(endTime);
-                        finished[2] = Math.Round((CommonFunctions.FromUnixTimeDateTime(endTime) - CommonFunctions.FromUnixTimeDateTime(game.start_time)).TotalDays, 2).ToString();
+                        finished[2] = Math.Round(
+                            isLive == true ? 
+                                (CommonFunctions.FromUnixTimeDateTime(endTime) - CommonFunctions.FromUnixTimeDateTime(mec.start_time)).TotalMinutes : 
+                                (CommonFunctions.FromUnixTimeDateTime(endTime) - CommonFunctions.FromUnixTimeDateTime(game.start_time)).TotalDays, 
+                            2).ToString();
                         if (game.white.team == "team1")
                         {
                             finished[17] = team1PlayersRemoved.Contains(game.white.username.ToUpper()) ? "1" : "0";
@@ -322,7 +329,7 @@ namespace API_Consumer.ClubMatch
                             finished[14] = game.white.username.ToString();
                         }
 
-                        finished[15] = item.board_number.ToString();
+                        finished[15] = CommonFunctions.getLastPart(item.board_url.ToString());
                         finished[16] = game.end_time == 0 ? "1" : "0";
                         finished[19] = game.eco != null ? game.eco.Segments.Last().Split('-')[0] : "";
                         finished[20] = game.url;
@@ -400,10 +407,8 @@ namespace API_Consumer.ClubMatch
             var team2 = from t in mec.teams.team2.players
                         select t;
 
-            
-
             var boards = from t1 in team1
-                         from t2 in team2
+                         join t2 in team2 on t1.board equals t2.board
                          select new
                          {
                              t1_username = t1.username,
@@ -442,7 +447,7 @@ namespace API_Consumer.ClubMatch
                     board_url = board.board_url,
                     board_number = board.board_number
                 };
-                if (!isLive)
+                if (1==1)
                 {
                     if (board.t1_played_as_white == null || board.t1_played_as_black == null)
                     {
